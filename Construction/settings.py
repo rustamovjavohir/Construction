@@ -90,12 +90,13 @@ WSGI_APPLICATION = 'Construction.wsgi.application'
 
 
 if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+    DATABASES = {'default': env.dj_db_url('DATABASE_URL')}
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
+    # }
 else:
     DATABASES = {'default': env.dj_db_url('DATABASE_URL')}
 

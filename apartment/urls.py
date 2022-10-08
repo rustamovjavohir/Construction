@@ -7,7 +7,7 @@ from .views import *
 from .routers import urlpatterns as r_urls
 
 urlpatterns = [
-    path("apartmentList/", ApartmentListView.as_view(), name='apartment-list'),
+    path("", ApartmentListView.as_view(), name='apartment-list'),
     path("floorList/", FloorListView.as_view(), name='floor-list')
 ]
 
