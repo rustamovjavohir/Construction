@@ -212,3 +212,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .env
+
+Construction/local_settings.py
