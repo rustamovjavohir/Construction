@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "apartment",
     "user",
     'advertising',
+    'sendEmail',
 
     # lib
     'environs',

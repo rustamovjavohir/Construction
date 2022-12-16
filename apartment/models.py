@@ -31,6 +31,7 @@ class Apartment(models.Model):
     image = models.ImageField(upload_to='Images', null=True, blank=True)
     image_2d = models.ImageField(upload_to='2DImages', null=True, blank=True)
     image_3d = models.ImageField(upload_to='3DImages', null=True, blank=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.floor} {self.room_quantity} {self.area}"
