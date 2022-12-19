@@ -1,0 +1,52 @@
+version: "3.8"
+
+
+services:
+
+  web:
+#    restart: always
+    build:
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    links:
+      - postgres:postgres
+    volumes:
+      - web-django:/usr/src/construction
+      - web-static:/usr/src/construction/static
+    command: python /usr/local/bin/gunicorn Construction.wsgi:application -w 2 -b :8000
+    env_file: .env
+    environment:
+      DEBUG: 'true'
+  #    ports:
+  #      - "8000:8000"
+    depends_on:
+      - postgres
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - web-static:/www/static
+    links:
+      - web:web
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+
+volumes:
+  pgdata:
+  web-django:
+  web-static:
+
