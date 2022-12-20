@@ -1,5 +1,5 @@
 from django.urls import path
-from sendEmail.views import *
+from apps.sendEmail.views import *
 
 urlpatterns = [
     path('send/', SendEmail.as_view(), name='send-email'),

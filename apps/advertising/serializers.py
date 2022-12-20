@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from drf_extra_fields.fields import Base64ImageField
 
-from advertising.models import Advertising
+from apps.advertising.models import Advertising
 
 
 class AdvertisingSerializer(serializers.ModelSerializer):

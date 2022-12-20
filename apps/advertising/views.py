@@ -1,8 +1,7 @@
 import base64
 
 from django.db import transaction
-from django.http import Http404, HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, status
 from rest_framework.generics import ListAPIView
@@ -11,9 +10,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from advertising.models import Advertising
-from advertising.serializers import AdvertisingSerializer
-from advertising.utils import custom_404_object_data
+from apps.advertising.models import Advertising
+from apps.advertising.serializers import AdvertisingSerializer
+from apps.advertising.utils import custom_404_object_data
 
 
 class AdvertisingListView(ListAPIView):

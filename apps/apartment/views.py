@@ -1,21 +1,15 @@
-import json
-import random
-
-from django.db.models import Count, Max
-from django.shortcuts import render
+from django.db.models import Max
 from django.db import transaction
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, status
-from rest_framework.decorators import action
-from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from advertising.utils import custom_404_object_data
-from apartment.models import *
-from apartment.serializers import *
+from apps.advertising.utils import custom_404_object_data
+from apps.apartment.models import *
+from apps.apartment.serializers import ApartmentSerializer, FloorSerializer, MyImageModelSerializer
 from rest_framework.generics import ListAPIView
 
 

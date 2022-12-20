@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apartment.models import Apartment, Floor
+from apps.apartment.models import Apartment, Floor
 from drf_extra_fields.fields import Base64ImageField
 
 

@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #  local
-    "apartment",
-    "user",
-    'advertising',
-    'sendEmail',
+    "apps.apartment",
+    "apps.user",
+    'apps.advertising',
+    'apps.sendEmail',
 
     # lib
     'environs',

@@ -1,12 +1,11 @@
 from django.db import transaction
-from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, status
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from user.models import User
-from user.serializers import UserSerializer
+from apps.user.models import User
+from apps.user.serializers import UserSerializer
 
 # Create your views here.
 

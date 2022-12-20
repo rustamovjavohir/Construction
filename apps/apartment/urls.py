@@ -3,8 +3,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView, TokenVerifyView,
 )
-from .views import *
-from .routers import urlpatterns as r_urls
+from apps.apartment.views import *
+from apps.apartment.routers import urlpatterns as r_urls
 
 urlpatterns = [
     path("", ApartmentListView.as_view(), name='apartment-list'),

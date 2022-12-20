@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apartment.models import Apartment, Floor
+from apps.apartment.models import Apartment, Floor
 
 
 # Register your models here.

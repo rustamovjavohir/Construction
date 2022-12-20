@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AdvertisingConfig(AppConfig):
+class ApartmentConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'advertising'
+    name = 'apps.apartment'
