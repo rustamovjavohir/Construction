@@ -6,7 +6,7 @@ services:
   web:
     restart: always
     build:
-      dockerfile: Dockerfile
+      dockerfile: apps/Dockerfile
     expose:
       - "8000"
     links:

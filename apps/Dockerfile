@@ -6,11 +6,11 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/construction
 
-COPY ./requirements.txt /usr/src/construction/requirements.txt
+COPY ../requirements.txt /usr/src/construction/requirements.txt
 
 RUN pip install -r /usr/src/construction/requirements.txt
 
-COPY . /usr/src/construction
+COPY .. /usr/src/construction
 
 EXPOSE 8000
 

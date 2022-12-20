@@ -22,10 +22,7 @@ from .yasg import urlpatterns as doc_url
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('apps.apartment.urls')),
-                  path('', include('apps.user.urls')),
-                  path('', include('apps.advertising.urls')),
-                  path('email/', include('apps.sendEmail.urls')),
+                  path('', include('apps.urls')),
                   re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
                   re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
