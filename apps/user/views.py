@@ -7,6 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from apps.user.models import User
 from apps.user.serializers import UserSerializer
 
+
 # Create your views here.
 
 
@@ -59,3 +60,5 @@ class UserViewset(ModelViewSet):
     @swagger_auto_schema(operation_summary="Foydalanuvchi haqidagi malumotlarini chop etish (retrieve)")
     def retrieve(self, request, *args, **kwargs):
         return super(UserViewset, self).retrieve(self, request, *args, **kwargs)
+
+# Test
