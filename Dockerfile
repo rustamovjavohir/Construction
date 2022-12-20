@@ -12,6 +12,7 @@ RUN pip install -r /usr/src/construction/requirements.txt
 
 COPY . /usr/src/construction
 
+EXPOSE 8000
 
 CMD ["python", "manage.py", "makemigrations"]
 CMD ["python", "manage.py", "migrate"]
