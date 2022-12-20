@@ -2,15 +2,17 @@ name: CI
 on:
   push:
     branches:
-      -master
+      - master
 jobs:
   run_tests:
-    runs-on: [ubuntu-latest]
+    runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v1
         with:
           python-version: 3.9
           architecture: 'x64'
+      - name: Install requirements
+        run: pip install -r requirements.txt
       - name: Tests
         run: python manage.py test
