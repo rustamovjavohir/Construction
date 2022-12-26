@@ -20,7 +20,6 @@ jobs:
           envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
           envkey_ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
           some_other_variable: foobar
-          directory: 'envfiles'
           file_name: .env
           fail_on_empty: false
       - name: Install requirements
