@@ -13,7 +13,7 @@ jobs:
           python-version: 3.9
           architecture: 'x64'
       - name: Make envfile
-        uses: actions/checkout@master
+        uses: SpicyPizza/create-envfile@master
         with:
           envkey_DEBUG: false
           envkey_SOME_API_KEY: "123456abcdef"
