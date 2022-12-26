@@ -12,6 +12,21 @@ jobs:
         with:
           python-version: 3.9
           architecture: 'x64'
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DEBUG: false
+          envkey_SOME_API_KEY: "123456abcdef"
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          envkey_ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          envkey_DB_NAME: ${{ secrets.DB_NAME }}
+          envkey_DB_USER: ${{ secrets.DB_USER }}
+          envkey_DB_PASS: ${{ secrets.DB_PASS }}
+          envkey_DB_SERVICE: ${{ secrets.DB_SERVICE }}
+          envkey_DB_PORT: ${{ secrets.DB_PORT }}
+          some_other_variable: foobar
+          file_name: .env
+          fail_on_empty: false
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Tests
