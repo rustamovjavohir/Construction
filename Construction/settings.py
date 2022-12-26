@@ -32,7 +32,6 @@ DEBUG = env.bool("DEBUG", default=False)
 # DEBUG = True
 ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
 # ALLOWED_HOSTS = ["*"]
-# ALLOWED_HOSTS = os.environ.get('SERVERNAMES').split(' ')
 # Application definition
 
 INSTALLED_APPS = [
