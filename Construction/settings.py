@@ -31,8 +31,8 @@ SECRET_KEY = 'django-insecure-ktjcqow(b9iz%-g6a3gn)7+$7if4f(-()90wx^$^b2a#qv8x%y
 DEBUG = env.bool("DEBUG", default=False)
 # DEBUG = True
 # ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
-ALLOWED_HOSTS = ["*"]
-# ALLOWED_HOSTS = os.environ.get('SERVERNAMES').split(' ')
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get('SERVERNAMES').split(' ')
 # Application definition
 
 INSTALLED_APPS = [
