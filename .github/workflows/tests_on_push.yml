@@ -13,7 +13,7 @@ jobs:
           python-version: 3.9
           architecture: 'x64'
       - name: Make envfile
-        uses: rustamovjavohir/create-envfile@v1.3
+        uses: rustamovjavohir/Construction/create-envfile@v1.3
         with:
           envkey_DEBUG: false
           envkey_SOME_API_KEY: "123456abcdef"
