@@ -6,12 +6,11 @@ urlpatterns = [
     path('send-email/', include('apps.sendEmail.urls')),
 ]
 
-#  master branch
+#  master branch test
 
 # test branch
 
 # main branch
 # q
-# b
-# t
+
 
