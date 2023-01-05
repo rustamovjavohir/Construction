@@ -15,6 +15,4 @@ urlpatterns = [
 
 #  reset
 
-
-
 #  test master
