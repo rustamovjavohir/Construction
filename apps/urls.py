@@ -7,10 +7,7 @@ urlpatterns = [
 ]
 
 
-#  reset
-
-
-#  test master conflict
+#  new commit
 
 
 #  test
