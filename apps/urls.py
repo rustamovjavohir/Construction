@@ -15,6 +15,5 @@ urlpatterns = [
 
 #  reset
 
-#  test master
 
-# merge
+#  test master conflict
