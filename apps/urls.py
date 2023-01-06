@@ -17,3 +17,6 @@ urlpatterns = [
 
 
 #  test master conflict
+
+
+#  merge without conflict
