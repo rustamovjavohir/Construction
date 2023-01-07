@@ -12,3 +12,6 @@ urlpatterns = [
 
 # test conflict 2
 
+# reset after hard
+
+
