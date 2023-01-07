@@ -6,9 +6,7 @@ urlpatterns = [
     path('send-email/', include('apps.sendEmail.urls')),
 ]
 
-
 #  new commit
 
 
-
-#  test
+# test

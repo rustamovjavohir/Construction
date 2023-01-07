@@ -140,4 +140,4 @@ cython_debug/
 
 # local settings
 
-Construction/local_settings.py
+config/local_settings.py
