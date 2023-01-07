@@ -5,13 +5,3 @@ urlpatterns = [
     path('apartment/', include('apps.apartment.urls')),
     path('send-email/', include('apps.sendEmail.urls')),
 ]
-
-#  new commit
-
-
-
-# test conflict 3
-
-# reset after hard
-
-
