@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "apps.user",
     'apps.advertising',
     'apps.sendEmail',
+    'apps.beautifulSoap',
+    'apps.seleniumApp',
 
     # lib
     'environs',
