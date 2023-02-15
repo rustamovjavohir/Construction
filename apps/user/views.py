@@ -62,3 +62,5 @@ class UserViewset(ModelViewSet):
         return super(UserViewset, self).retrieve(self, request, *args, **kwargs)
 
 # test branch
+
+class Userasd()
