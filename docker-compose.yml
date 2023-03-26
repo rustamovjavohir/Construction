@@ -14,7 +14,7 @@ services:
     volumes:
       - web-django:/usr/src/construction
       - web-static:/usr/src/construction/static
-    command: python /usr/local/bin/gunicorn Construction.wsgi:application -w 2 -b :8000
+    command: python /usr/local/bin/gunicorn config.wsgi:application -w 2 -b :8000
     env_file: .env
     environment:
       DEBUG: 'true'

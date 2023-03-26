@@ -88,6 +88,7 @@ cython_debug/
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+.idea/**/Construction.iml
 
 # Gradle
 .idea/**/gradle.xml
@@ -108,4 +109,4 @@ cython_debug/
 
 .idea
 
-Construction/local_settings.py
+config/local_settings.py
