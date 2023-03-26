@@ -19,3 +19,5 @@ class TestUser(TestCase):
         self.assertEqual(self.user.phone, "998999999989")
         self.assertEqual(self.user.is_web, True)
         self.assertEqual(self.user.is_telegram, False)
+        
+        # this is new comment
