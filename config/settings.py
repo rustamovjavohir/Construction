@@ -43,10 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #  local
-    "apps.apartment",
+    "apps.apartment.apps.ApartmentConfig",
     "apps.user",
     'apps.advertising',
     'apps.sendEmail',
+    'apps.beautifulSoap',
+    'apps.seleniumApp',
+    # 'apps.apartment.apps.CustomAdminConfig',
 
     # lib
     'environs',
