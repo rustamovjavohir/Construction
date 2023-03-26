@@ -8,7 +8,7 @@ class TestUser(TestCase):
         self.user = User.objects.create(
             name=" test",
             email=" ",  # email is required
-            phone="998999999999",
+            phone="998999999988",
             is_web=True,
             is_telegram=False,
         )
@@ -16,6 +16,6 @@ class TestUser(TestCase):
     def test_user(self):
         self.assertEqual(self.user.name, " test")
         self.assertEqual(self.user.email, " ")
-        self.assertEqual(self.user.phone, "998999999999")
+        self.assertEqual(self.user.phone, "998999999988")
         self.assertEqual(self.user.is_web, True)
         self.assertEqual(self.user.is_telegram, False)
