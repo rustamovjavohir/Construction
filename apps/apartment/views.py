@@ -1,5 +1,7 @@
 from django.db.models import Max
 from django.db import transaction
+from django.shortcuts import render
+from django.views import View
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import filters, status
 from rest_framework.parsers import JSONParser
@@ -169,3 +171,14 @@ class FloorListView(ListAPIView):
     serializer_class = FloorSerializer
     permission_classes = [AllowAny]
     parser_classes = (JSONParser,)
+
+
+class CustomAdminView(View):
+    queryset = Floor.objects.all()
+
+    def get(self, request, pk):
+        obj = self.queryset.filter(id=pk).first()
+        context = {
+            "name": obj.name,
+        }
+        return render(request, 'sometemplate.html', context=context)
