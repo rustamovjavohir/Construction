@@ -2,7 +2,7 @@ from django.db.models import Max
 from django.db import transaction
 from django.shortcuts import render
 from django.views import View
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import extend_schema
 from rest_framework import filters, status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
@@ -47,7 +47,7 @@ class ApartmentListView(ListAPIView):
         }
         return Response(data=data, status=200)
 
-    @swagger_auto_schema(operation_summary="Kvartiralar haqidagi malumotlar ro'yhatini chop etish (list)")
+    @extend_schema(summary="Kvartiralar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, *args, **kwargs):
         return super(ApartmentListView, self).get(self, request, *args, **kwargs)
 
@@ -80,7 +80,7 @@ class ApartmentViewset(ModelViewSet):
         return obj
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Kvartiralar kirish")
+    @extend_schema(summary="Kvartiralar kirish")
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -94,7 +94,7 @@ class ApartmentViewset(ModelViewSet):
         return Response(data=data, status=status.HTTP_200_OK, headers=headers)
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Kvartira malumotlarini yangilash")
+    @extend_schema(summary="Kvartira malumotlarini yangilash")
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
@@ -115,6 +115,8 @@ class ApartmentViewset(ModelViewSet):
             data = custom_404_object_data()
         return Response(data=data, status=status.HTTP_200_OK)
 
+    @extend_schema(summary="Kvartira malumotlarini o'chirish")
+    @transaction.atomic
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance:
@@ -129,7 +131,7 @@ class ApartmentViewset(ModelViewSet):
             data = custom_404_object_data()
         return Response(data=data, status=200)
 
-    @swagger_auto_schema(operation_summary="Kvartira haqidagi malumotlarini chop etish (retrieve)")
+    @extend_schema(summary="Kvartira haqidagi malumotlarini chop etish (retrieve)")
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance:
@@ -143,7 +145,7 @@ class ApartmentViewset(ModelViewSet):
             data = custom_404_object_data()
         return Response(data=data, status=200)
 
-    @swagger_auto_schema(operation_summary='Kvartiralar royhatini chop etish')
+    @extend_schema(summary='Kvartiralar royhatini chop etish')
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
@@ -160,7 +162,7 @@ class ApartmentViewset(ModelViewSet):
         return Response(data=data, status=200)
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Kvartira malumotlarini qisman yangilash")
+    @extend_schema(summary="Kvartira malumotlarini qisman yangilash")
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
@@ -172,10 +174,15 @@ class FloorListView(ListAPIView):
     permission_classes = [AllowAny]
     parser_classes = (JSONParser,)
 
+    @extend_schema(summary="Qavatlar haqidagi malumotlar ro'yhatini chop etish (list)")
+    def get(self, request, *args, **kwargs):
+        return super(FloorListView, self).get(self, request, *args, **kwargs)
+
 
 class CustomAdminView(View):
     queryset = Floor.objects.all()
 
+    @extend_schema(summary="Qavatlar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, pk):
         obj = self.queryset.filter(id=pk).first()
         context = {

@@ -2,10 +2,11 @@ import base64
 
 from django.db import transaction
 from django.http import HttpResponse
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import extend_schema
 from rest_framework import filters, status
 from rest_framework.generics import ListAPIView
 from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -17,11 +18,12 @@ from apps.advertising.utils import custom_404_object_data
 
 class AdvertisingListView(ListAPIView):
     queryset = Advertising.objects.filter(is_deleted=False)
+    permission_classes = [IsAuthenticated, ]
     serializer_class = AdvertisingSerializer
     filter_backends = (filters.SearchFilter,)
     parser_classes = [JSONParser, ]
 
-    @swagger_auto_schema(operation_summary="Reklamalar haqidagi malumotlar ro'yhatini chop etish (list)")
+    @extend_schema(summary="Reklamalar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, *args, **kwargs):
         return super(AdvertisingListView, self).get(self, request, *args, **kwargs)
 
@@ -49,7 +51,7 @@ class AdvertisingViewset(ModelViewSet):
 
         return obj
 
-    @swagger_auto_schema(operation_summary='Reklamalar royhatini chop etish')
+    @extend_schema(summary='Reklamalar royhatini chop etish')
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
@@ -68,7 +70,7 @@ class AdvertisingViewset(ModelViewSet):
         return Response(data=data, status=200)
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Reklama kirish")
+    @extend_schema(summary="Reklama kirish")
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -82,7 +84,7 @@ class AdvertisingViewset(ModelViewSet):
         return Response(data=data, status=status.HTTP_201_CREATED, headers=headers)
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Reklama malumotlarini yangilash")
+    @extend_schema(summary="Reklama malumotlarini yangilash")
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
@@ -104,12 +106,12 @@ class AdvertisingViewset(ModelViewSet):
         return Response(data=data, status=200)
 
     @transaction.atomic
-    @swagger_auto_schema(operation_summary="Reklama malumotlarini qisman yangilash")
+    @extend_schema(summary="Reklama malumotlarini qisman yangilash")
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="Reklama malumotlarini o'chirish")
+    @extend_schema(summary="Reklama malumotlarini o'chirish")
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance:
@@ -124,7 +126,7 @@ class AdvertisingViewset(ModelViewSet):
             data = custom_404_object_data()
         return Response(data=data, status=status.HTTP_200_OK)
 
-    @swagger_auto_schema(operation_summary="Reklama haqidagi malumotlarini chop etish (retrieve)")
+    @extend_schema(summary="Reklama haqidagi malumotlarini chop etish (retrieve)")
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance:
@@ -145,6 +147,7 @@ class TemplateView(APIView):
         result = base64.b64decode(a).decode('utf-8')
         return result
 
+    @extend_schema(summary="Decode template to base64", description="Decode base64")
     def get(self, request):
         result = self.decode()
 

@@ -6,4 +6,5 @@ urlpatterns = [
     path('send-email/', include('apps.sendEmail.urls')),
     path('selenium/', include('apps.seleniumApp.urls')),
     path('beautiful/', include('apps.beautifulSoap.urls')),
+    path('user/', include('apps.user.urls')),
 ]

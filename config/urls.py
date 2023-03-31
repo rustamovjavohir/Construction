@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 from config import settings
-from .yasg import urlpatterns as doc_url
+# from .yasg import urlpatterns as doc_url
+from config.api_docs import urlpatterns as doc_url
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
