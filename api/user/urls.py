@@ -1,8 +1,7 @@
 from django.urls import path
 
-from apps.user.routers import urlpatterns as r_urls
-from apps.user.views import LoginView, GetRefreshTokenView, LogoutView
-from rest_framework_simplejwt.views import (TokenRefreshView, TokenObtainPairView, TokenBlacklistView)
+from api.user.routers.routers import urlpatterns as r_urls
+from api.user.views.views import LoginView, GetRefreshTokenView, LogoutView
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),

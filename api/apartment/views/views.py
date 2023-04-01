@@ -11,7 +11,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.advertising.utils import custom_404_object_data
 from apps.apartment.models import *
-from apps.apartment.serializers import ApartmentSerializer, FloorSerializer, MyImageModelSerializer
+from api.apartment.serializers.serializers import ApartmentSerializer, FloorSerializer, MyImageModelSerializer
 from rest_framework.generics import ListAPIView
 
 

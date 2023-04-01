@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import ApartmentViewset
+from api.apartment.views.views import ApartmentViewset
 
 routers = DefaultRouter()
 

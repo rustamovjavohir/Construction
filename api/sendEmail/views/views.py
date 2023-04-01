@@ -1,14 +1,11 @@
-import threading
 from collections import OrderedDict
 
-from django.core.mail import send_mail
-from django.conf import settings
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, DestroyAPIView, RetrieveAPIView
-from apps.sendEmail.serializers import SendMessageSerializer, EmailSerializer
+from api.sendEmail.serializers.serializers import SendMessageSerializer, EmailSerializer
 from apps.sendEmail.models import Email
 
 

@@ -5,7 +5,6 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from apps.apartment.models import Apartment, Floor
-from apps.apartment.views import CustomAdminView
 
 
 # Register your models here.

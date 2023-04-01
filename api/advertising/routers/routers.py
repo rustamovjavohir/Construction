@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 
-from apps.advertising.views import AdvertisingViewset
+from api.advertising.views.views import AdvertisingViewset
 
 routers = DefaultRouter()
 

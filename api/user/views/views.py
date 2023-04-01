@@ -6,11 +6,11 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from apps.user.models import User
-from apps.user.serializers import UserSerializer, CustomObtainPairSerializer, CustomTokenRefreshSerializer, \
+from api.user.serializers.serializers import UserSerializer, CustomObtainPairSerializer, CustomTokenRefreshSerializer, \
     LogoutSerializer
 
 

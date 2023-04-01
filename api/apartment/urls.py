@@ -1,10 +1,6 @@
 from django.urls import path
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView, TokenVerifyView,
-)
-from apps.apartment.views import *
-from apps.apartment.routers import urlpatterns as r_urls
+from api.apartment.views.views import *
+from api.apartment.routers.routers import urlpatterns as r_urls
 
 urlpatterns = [
     path("", ApartmentListView.as_view(), name='apartment-list'),

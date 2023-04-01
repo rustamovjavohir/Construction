@@ -18,3 +18,7 @@ class AdvertisingSerializer(serializers.ModelSerializer):
             image = ''
 
         return Advertising.objects.create(image=image, **validated_data)
+
+
+class TemplateSerializer(serializers.Serializer):
+    user_pnfl = serializers.CharField(allow_null=True)

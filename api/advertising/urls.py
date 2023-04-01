@@ -1,6 +1,6 @@
 from django.urls import path
-from apps.advertising.views import *
-from apps.advertising.routers import urlpatterns as router_urls
+from api.advertising.views.views import *
+from api.advertising.routers.routers import urlpatterns as router_urls
 
 urlpatterns = [
     path('', AdvertisingListView.as_view(), name='advertising'),
