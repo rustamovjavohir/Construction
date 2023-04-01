@@ -1,2 +1,2 @@
 # Construction
-This is Cnstruction app with deployment files
+This is Construction app with deployment files
