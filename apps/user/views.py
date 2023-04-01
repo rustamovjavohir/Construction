@@ -17,7 +17,7 @@ from apps.user.serializers import UserSerializer, CustomObtainPairSerializer, Cu
 # Create your views here.
 
 
-class UserViewset(ModelViewSet):
+class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = (filters.SearchFilter,)
@@ -28,7 +28,7 @@ class UserViewset(ModelViewSet):
 
     @extend_schema(summary='Foydalanuvchilar royhatini chop etish')
     def list(self, request, *args, **kwargs):
-        return super(UserViewset, self).list(self, request, *args, **kwargs)
+        return super(UserViewSet, self).list(self, request, *args, **kwargs)
 
     @transaction.atomic
     @extend_schema(summary="Foydalanuvchi kirish")
@@ -61,11 +61,11 @@ class UserViewset(ModelViewSet):
 
     @extend_schema(summary="Foydalanuvchi malumotlarini o'chirish")
     def destroy(self, request, *args, **kwargs):
-        return super(UserViewset, self).destroy(self, request, *args, **kwargs)
+        return super(UserViewSet, self).destroy(self, request, *args, **kwargs)
 
     @extend_schema(summary="Foydalanuvchi haqidagi malumotlarini chop etish (retrieve)")
     def retrieve(self, request, *args, **kwargs):
-        return super(UserViewset, self).retrieve(self, request, *args, **kwargs)
+        return super(UserViewSet, self).retrieve(self, request, *args, **kwargs)
 
 
 # test branch
@@ -90,12 +90,8 @@ class LogoutView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         try:
             refresh_token = serializer.validated_data['refresh']
-            # try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-            # except TokenError as e:
-            #     data = {"error": str(e)}
-            #     raise ValueError(str(e))
             data = {
                 'success': True,
                 "message": "You are logged out"

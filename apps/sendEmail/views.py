@@ -1,4 +1,5 @@
 import threading
+from collections import OrderedDict
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -12,20 +13,26 @@ from apps.sendEmail.models import Email
 
 
 class SendEmail(APIView):
+    serializer_class = SendMessageSerializer
+
+    def get_serializer(self, *args, **kwargs):
+        return SendMessageSerializer(*args, **kwargs)
+
     def post(self, request):
-        serializer = SendMessageSerializer(request.data)
-        subject = serializer.data.get('subject')
-        message = serializer.data.get('message')
-        from_email = serializer.data.get('email')
-        recipient_list = [settings.RECIPIENT_ADDRESS]
-        # send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
-        send_email_thread = threading.Thread(target=send_mail, args=(subject, message, from_email, recipient_list))
-        send_email_thread.start()
-        Email.objects.create(**serializer.data, recipient=settings.RECIPIENT_ADDRESS)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer_data = serializer.validated_data
+        serializer.save()
         data = {
             'success': True,
-            'status_sode': 200
+            'status_sode': 200,
         }
+
+        data = OrderedDict([
+            ('success', True),
+            ('statusCode', 200),
+            ('result', serializer_data)
+        ])
         return Response(data=data, status=200)
 
 
