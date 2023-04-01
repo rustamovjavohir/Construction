@@ -20,10 +20,6 @@ class SendEmail(APIView):
         serializer.is_valid(raise_exception=True)
         serializer_data = serializer.validated_data
         serializer.save()
-        data = {
-            'success': True,
-            'status_sode': 200,
-        }
 
         data = OrderedDict([
             ('success', True),
