@@ -13,6 +13,7 @@ dj-database-url==1.0.0
 Django==4.0.4
 django-cors-headers==3.12.0
 django-extra-fields==3.0.2
+django-jazzmin==2.6.0
 django-rest-swagger==2.2.0
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.1.0

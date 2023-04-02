@@ -1,2 +1,1 @@
-# Construction
-This is Construction app with deployment files
+# Construction of the README.md file
