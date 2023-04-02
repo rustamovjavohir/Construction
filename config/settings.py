@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #  local
+    "apps.auth_user",
     "apps.apartment.apps.ApartmentConfig",
     "apps.user",
     'apps.advertising',
@@ -99,6 +100,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+AUTH_USER_MODEL = "auth_user.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

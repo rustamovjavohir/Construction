@@ -10,10 +10,13 @@ from rest_framework_simplejwt.tokens import AccessToken
 from apps.user.models import User
 
 
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['url', 'id', 'phone', 'name', 'email', 'message', 'is_telegram', 'is_web',
+                  'is_done', 'created_at', 'status']
 
 
 class CustomObtainPairSerializer(TokenObtainPairSerializer):
