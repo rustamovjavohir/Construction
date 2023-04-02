@@ -6,18 +6,14 @@ from apps.user.models import User
 class TestUser(TestCase):
     def setUp(self):
         self.user = User.objects.create(
-            name=" test",
+            username=" test",
             email=" ",  # email is required
-            phone="998999999989",
-            is_web=True,
-            is_telegram=False,
+            phone="998999999989"
         )
 
     def test_user(self):
-        self.assertEqual(self.user.name, " test")
+        self.assertEqual(self.user.username, " test")
         self.assertEqual(self.user.email, " ")
         self.assertEqual(self.user.phone, "998999999989")
-        self.assertEqual(self.user.is_web, True)
-        self.assertEqual(self.user.is_telegram, False)
-        
+
         # this is new comment
