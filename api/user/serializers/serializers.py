@@ -14,16 +14,10 @@ from apps.user.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # fields = '__all__'
-        fields = ['url', 'id', 'phone', 'name', 'email', 'message', 'is_telegram', 'is_web',
-                  'is_done', 'created_at', 'status']
+        fields = ['url', 'id', 'phone', 'username', 'email', 'message', 'is_done', 'created_at', 'status']
 
 
 class CustomObtainPairSerializer(TokenObtainPairSerializer):
-    # default_error_messages = {
-    #     'no_active_account': 'No active account found with the specified details',
-    #     'inactive_account': 'User account is disabled.',
-    # }
 
     @classmethod
     def get_token(cls, user):
