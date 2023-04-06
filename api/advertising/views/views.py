@@ -31,6 +31,7 @@ class AdvertisingListView(ListAPIView):
 class AdvertisingViewset(ModelViewSet):
     queryset = Advertising.objects.filter(is_deleted=False)
     serializer_class = AdvertisingSerializer
+    permission_classes = [IsAuthenticated, ]
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())

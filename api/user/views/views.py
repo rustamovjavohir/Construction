@@ -1,4 +1,5 @@
 from django.db import transaction
+from django.http import JsonResponse
 from drf_spectacular.utils import extend_schema
 from rest_framework import filters, status
 from rest_framework.generics import GenericAPIView
@@ -11,7 +12,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from apps.user.models import User
 from api.user.serializers.serializers import UserSerializer, CustomObtainPairSerializer, CustomTokenRefreshSerializer, \
-    LogoutSerializer
+    LogoutSerializer, CustomUserProfilesSerializer
 
 
 # Create your views here.
@@ -100,3 +101,19 @@ class LogoutView(GenericAPIView):
         except Exception as e:
             data = {"error": str(e)}
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CustomUserView(GenericAPIView):
+    serializer_class = CustomUserProfilesSerializer
+    permission_classes = [IsAuthenticated, ]
+
+    @extend_schema(summary="Foydalanuvchi haqidagi malumotlarini chop etish (retrieve)")
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(request.user)
+        return JsonResponse(serializer.data)
+
+    def put(self, request, *args, **kwargs):
+        serializer = self.get_serializer(request.user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return JsonResponse(serializer.data)

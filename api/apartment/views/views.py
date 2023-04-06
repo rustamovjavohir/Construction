@@ -5,7 +5,7 @@ from django.views import View
 from drf_spectacular.utils import extend_schema
 from rest_framework import filters, status
 from rest_framework.parsers import JSONParser
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -54,6 +54,7 @@ class ApartmentListView(ListAPIView):
 
 class ApartmentViewset(ModelViewSet):
     queryset = Apartment.objects.filter(is_deleted=False)
+    permission_classes = [IsAuthenticated, ]
     serializer_class = MyImageModelSerializer
     filter_backends = (filters.SearchFilter,)
     parser_classes = [JSONParser, ]
