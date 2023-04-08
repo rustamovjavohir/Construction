@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.sendEmail',
     'apps.beautifulSoap',
     'apps.seleniumApp',
+    'apps.order',
     # 'apps.apartment.apps.CustomAdminConfig',
 
     # lib
@@ -59,8 +60,6 @@ INSTALLED_APPS = [
     'PIL',
     'drf_spectacular',
     'drf_spectacular_sidecar',
-    # 'drf_yasg',
-    # 'django-rest-swagger',
     'rest_framework',
     'faker',
     'corsheaders',

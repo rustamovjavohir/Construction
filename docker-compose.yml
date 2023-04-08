@@ -42,9 +42,20 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data/
 
+  elasticsearch:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+        - "9200:9200"
 
 volumes:
   pgdata:
   web-django:
   web-static:
+  elasticsearch-data:
 

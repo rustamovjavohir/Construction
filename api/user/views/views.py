@@ -11,8 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from apps.user.models import User
-from api.user.serializers.serializers import UserSerializer, CustomObtainPairSerializer, CustomTokenRefreshSerializer, \
-    LogoutSerializer, CustomUserProfilesSerializer
+from api.user.serializers.serializers import UserSerializer
 
 
 # Create your views here.
@@ -68,52 +67,4 @@ class UserViewSet(ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super(UserViewSet, self).retrieve(self, request, *args, **kwargs)
 
-
 # test branch
-
-class LoginView(TokenObtainPairView):
-    serializer_class = CustomObtainPairSerializer
-
-
-class GetRefreshTokenView(TokenRefreshView):
-    serializer_class = CustomTokenRefreshSerializer
-
-    def post(self, request, *args, **kwargs):
-        return super(GetRefreshTokenView, self).post(request, *args, **kwargs)
-
-
-class LogoutView(GenericAPIView):
-    serializer_class = LogoutSerializer
-    permission_classes = [IsAuthenticated, ]
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        try:
-            refresh_token = serializer.validated_data['refresh']
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-            data = {
-                'success': True,
-                "message": "You are logged out"
-            }
-            return Response(data=data, status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            data = {"error": str(e)}
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
-
-
-class CustomUserView(GenericAPIView):
-    serializer_class = CustomUserProfilesSerializer
-    permission_classes = [IsAuthenticated, ]
-
-    @extend_schema(summary="Foydalanuvchi haqidagi malumotlarini chop etish (retrieve)")
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(request.user)
-        return JsonResponse(serializer.data)
-
-    def put(self, request, *args, **kwargs):
-        serializer = self.get_serializer(request.user, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return JsonResponse(serializer.data)

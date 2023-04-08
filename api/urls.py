@@ -7,4 +7,6 @@ urlpatterns = [
     path('selenium/', include('api.selenium.urls')),
     path('beautiful/', include('api.beautifulSoap.urls')),
     path('users/', include('api.user.urls')),
+    path('auth/', include('api.auth_user.urls')),
+    # path('orders/', include('api.order.urls')),
 ]
