@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.contrib.admin.apps import AdminConfig
 
 
 class ApartmentConfig(AppConfig):
@@ -7,7 +6,7 @@ class ApartmentConfig(AppConfig):
     name = 'apps.apartment'
 
 
-class CustomAdminConfig(AdminConfig):  # 1.
-    default_site = 'myproject.admin.CustomAdminSite'  # 2.
-    name = 'Salom'
-    label = 'salom'
+# class CustomAdminConfig(AdminConfig):  # 1.
+#     default_site = 'myproject.admin.CustomAdminSite'  # 2.
+#     name = 'Salom'
+#     label = 'salom'

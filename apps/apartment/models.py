@@ -34,7 +34,7 @@ class Apartment(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.floor} {self.room_quantity} {self.area}"
+        return f"{self.floor} floor {self.room_quantity} room {self.area} m^2"
 
     class Meta:
         ordering = ["-id"]

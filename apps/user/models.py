@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your models here.
@@ -30,6 +31,18 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления", null=True, blank=True)
     is_deleted = models.BooleanField(default=False, verbose_name="Удален")
     status = models.CharField(max_length=250, choices=Status.choices, default=Status.INACTIVE, verbose_name="Статус")
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.status == User.Status.DELETED:
+            self.is_deleted = True
+        self.set_password(self.password)
+        super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
         return self.username

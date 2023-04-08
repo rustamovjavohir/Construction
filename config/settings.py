@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
     #  local
     "apps.auth_user",
-    "apps.apartment.apps.ApartmentConfig",
+    "apps.apartment",
     "apps.user",
     'apps.advertising',
     'apps.sendEmail',
@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     "rest_framework_simplejwt.token_blacklist",
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
 
 ]
 
@@ -393,6 +395,12 @@ JAZZMIN_SETTINGS = {
     # "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     # # Add a language dropdown into the admin
     # "language_chooser": True,
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
 }
 
 try:
