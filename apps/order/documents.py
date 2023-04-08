@@ -8,6 +8,19 @@ order_index.settings(
 )
 
 
-# @order_index.doc_type
-# class OrderDocument(Document):
-#     class
+@order_index.doc_type
+class OrderDocument(Document):
+    id = fields.IntegerField(attr='id')
+    title = fields.TextField(
+        fields={
+            "raw": {
+                "type": "keyword"
+            }
+        }
+    )
+
+    class Django:
+        model = Order
+        fields = [
+            'name',
+        ]
