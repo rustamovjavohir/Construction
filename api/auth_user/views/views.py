@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
+from rest_framework.exceptions import NotAuthenticated
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -48,6 +49,18 @@ class LogoutView(GenericAPIView):
 class CustomUserView(GenericAPIView):
     serializer_class = CustomUserProfilesSerializer
     permission_classes = [IsAuthenticated, ]
+
+    def handle_exception(self, exc):
+        response = super().handle_exception(exc)
+        if isinstance(exc, NotAuthenticated):
+            response.data['success'] = False
+            response.data['statusCode'] = exc.status_code
+            response.data['code'] = exc.default_code
+            response.data['message'] = exc.detail
+            response.data['result'] = None
+            response.status_code = status.HTTP_200_OK
+            response.data.pop('detail')
+        return response
 
     @extend_schema(summary="Foydalanuvchi haqidagi malumotlarini chop etish (retrieve)")
     def get(self, request, *args, **kwargs):

@@ -59,10 +59,6 @@ class ApartmentViewset(ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     parser_classes = [JSONParser, ]
 
-    # parser_classes = (MultiPartParser,)
-    # permission_classes = [IsAdminUser, ]
-    # authentication_classes = [JWTAuthentication, ]
-
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
 

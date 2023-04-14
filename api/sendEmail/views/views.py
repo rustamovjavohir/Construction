@@ -1,10 +1,13 @@
 from collections import OrderedDict
 
+from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, DestroyAPIView, RetrieveAPIView
+
+from api.sendEmail.exceptions.exceptions import CustomException
 from api.sendEmail.serializers.serializers import SendMessageSerializer, EmailSerializer
 from apps.sendEmail.models import Email
 
@@ -27,6 +30,15 @@ class SendEmail(APIView):
             ('result', serializer_data)
         ])
         return Response(data=data, status=200)
+
+    def handle_exception(self, exc):
+        if isinstance(exc, CustomException):
+            return Response(status=status.HTTP_200_OK, data={
+                'success': False,
+                'statusCode': exc.status_code,
+                'result': '',
+                'error': exc.detail
+            })
 
 
 class EmailListView(ListAPIView):

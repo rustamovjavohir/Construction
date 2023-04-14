@@ -6,6 +6,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
+from api.sendEmail.exceptions.exceptions import CustomException
 from apps.sendEmail.models import Email
 
 
@@ -25,13 +26,11 @@ class SendMessageSerializer(serializers.Serializer):
         message = self.validated_data.get('message')
         from_email = self.validated_data.get('email')
         recipient_list = [settings.RECIPIENT_ADDRESS]
-        # send_email_thread = threading.Thread(target=send_mail, args=(subject, message, from_email, recipient_list))
-        # send_email_thread.start()
-        # Email.objects.create(**self.validated_data, recipient=settings.RECIPIENT_ADDRESS)
 
     def validate_subject(self, value: str):
         if value.startswith('Salom'):
-            raise ValidationError("Subject startswith Salom")
+            raise CustomException("Subject startswith Salom")
+            # raise ValidationError("Subject startswith Salom")
         return value
 
     def validate(self, attrs):

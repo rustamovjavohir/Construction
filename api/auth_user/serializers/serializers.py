@@ -49,9 +49,14 @@ class LogoutSerializer(serializers.Serializer):
 
 
 class CustomUserProfilesSerializer(serializers.ModelSerializer):
+    firstName = serializers.CharField(source='first_name', )
+    lastName = serializers.CharField(source='last_name', )
+    telegramId = serializers.IntegerField(source='telegram_id', )
+    isSuperuser = serializers.BooleanField(source='is_superuser', )
+
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'photo', 'telegram_id', 'is_superuser']
+        fields = ['id', 'username', 'firstName', 'lastName', 'email', 'photo', 'telegramId', 'isSuperuser']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
