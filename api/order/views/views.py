@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from api.order.filters.filters import OrderFilter
 from api.order.paginations import OrderPagination
 from api.order.serializers.serializers import OrderDocumentSerializer
 from apps.order.documents import OrderDocument
@@ -18,6 +19,7 @@ class OrderDocumentViewSet(DocumentViewSet):
     filter_backends = [FilteringFilterBackend, CompoundSearchFilterBackend]
     search_fields = ('name',)
     multi_match_search_fields = ('name',)
+    filterset_class = OrderFilter
     filter_fields = {'title': 'name', }
     pagination_class = OrderPagination
 

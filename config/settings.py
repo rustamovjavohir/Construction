@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
+    'django_filters',
 
 ]
 
