@@ -22,12 +22,6 @@ class SendMessageSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=250)
     phone = serializers.CharField(max_length=250, allow_null=True)
 
-    def save(self, **kwargs):
-        subject = self.validated_data.get('subject')
-        message = self.validated_data.get('message')
-        from_email = self.validated_data.get('email')
-        recipient_list = [settings.RECIPIENT_ADDRESS]
-
     def validate_subject(self, value: str):
         if value.startswith('Salom'):
             raise CustomException("Subject startswith Salom")
@@ -37,6 +31,15 @@ class SendMessageSerializer(serializers.Serializer):
         data = super(SendMessageSerializer, self).validate(attrs)
         data.pop('phone')
         return data
+
+    def save(self, **kwargs):
+        subject = self.validated_data.get('subject')
+        message = self.validated_data.get('message')
+        from_email = self.validated_data.get('email')
+        recipient_list = [settings.RECIPIENT_ADDRESS]
+        email = Email.objects.create(subject=self.subject, message=message, email=from_email,
+                                     recipient=recipient_list[0])
+        # return email
 
     class Meta:
         validators = [

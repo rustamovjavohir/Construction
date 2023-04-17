@@ -1,10 +1,12 @@
 from collections import OrderedDict
 
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.generics import ListAPIView, DestroyAPIView, RetrieveAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -15,11 +17,10 @@ from api.sendEmail.serializers.serializers import SendMessageSerializer, EmailSe
 from apps.sendEmail.models import Email
 
 
-class SendEmail(APIView):
+class SendEmail(GenericAPIView):
     serializer_class = SendMessageSerializer
-
-    def get_serializer(self, *args, **kwargs):
-        return SendMessageSerializer(*args, **kwargs)
+    queryset = Email.objects.all()
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -32,7 +33,10 @@ class SendEmail(APIView):
             ('statusCode', 200),
             ('result', serializer_data)
         ])
-        return Response(data=data, status=200)
+        return JsonResponse(data=data, status=200)
+
+    def get_serializer(self, *args, **kwargs):
+        return SendMessageSerializer(*args, **kwargs)
 
     def handle_exception(self, exc):
         if isinstance(exc, CustomException):
@@ -42,13 +46,6 @@ class SendEmail(APIView):
                 'result': '',
                 'error': exc.detail
             })
-
-        return Response(status=status.HTTP_200_OK, data={
-            'success': False,
-            'statusCode': exc.status_code,
-            'result': '',
-            'error': exc.detail
-        })
 
 
 class EmailListView(ListAPIView):
