@@ -43,6 +43,13 @@ class SendEmail(APIView):
                 'error': exc.detail
             })
 
+        return Response(status=status.HTTP_200_OK, data={
+            'success': False,
+            'statusCode': exc.status_code,
+            'result': '',
+            'error': exc.detail
+        })
+
 
 class EmailListView(ListAPIView):
     queryset = Email.objects.all()

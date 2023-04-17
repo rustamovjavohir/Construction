@@ -8,6 +8,7 @@ from rest_framework.validators import UniqueTogetherValidator
 
 from api.sendEmail.exceptions.exceptions import CustomException
 from apps.sendEmail.models import Email
+from django.utils.translation import gettext_lazy as _
 
 
 def greater_then_10(value: str):
@@ -30,7 +31,6 @@ class SendMessageSerializer(serializers.Serializer):
     def validate_subject(self, value: str):
         if value.startswith('Salom'):
             raise CustomException("Subject startswith Salom")
-            # raise ValidationError("Subject startswith Salom")
         return value
 
     def validate(self, attrs):
@@ -43,7 +43,7 @@ class SendMessageSerializer(serializers.Serializer):
             UniqueTogetherValidator(
                 queryset=Email.objects.all(),
                 fields=['subject', 'message'],
-                message="Subject and message fields must be unique"
+                message=_("Subject and message fields must be unique")
             )
         ]
 
