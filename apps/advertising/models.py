@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -11,6 +12,12 @@ class Advertising(models.Model):
     created_at = models.DateField(auto_now_add=True)
     finished_at = models.DateField(null=True, blank=True)
     is_deleted = models.BooleanField(default=False)
+    slug = models.SlugField(max_length=250, unique=True, null=True, blank=True, db_index=True, verbose_name="URL")
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-id']
