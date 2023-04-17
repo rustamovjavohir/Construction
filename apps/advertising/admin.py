@@ -6,8 +6,8 @@ from apps.advertising.models import Advertising
 
 @admin.register(Advertising)
 class AdvertisingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image', 'description', 'created_at', 'finished_at', 'is_deleted', 'slug')
-    list_display_links = ('title', 'slug')
-    search_fields = ('title', 'image', 'description', 'created_at', 'finished_at', 'is_deleted', 'slug')
+    list_display = ('id', 'title', 'image', 'description', 'created_at', 'finished_at', 'is_deleted', 'slug')
+    list_display_links = ('id', 'title', 'slug')
+    search_fields = ('id', 'title', 'image', 'description', 'created_at', 'finished_at', 'is_deleted', 'slug')
     list_filter = ('finished_at', 'is_deleted')
     # prepopulated_fields = {'slug': ('title',)}

@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import models
 from django.utils.text import slugify
 
@@ -6,6 +8,7 @@ from django.utils.text import slugify
 
 
 class Advertising(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
     title = models.CharField(max_length=250)
     image = models.ImageField(upload_to='Advertising', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
