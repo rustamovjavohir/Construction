@@ -10,17 +10,15 @@ from api.sendEmail.exceptions.exceptions import CustomException
 from apps.sendEmail.models import Email
 from django.utils.translation import gettext_lazy as _
 
+from config import settings
+
 
 def greater_then_10(value: str):
     if len(value) > 10:
         raise ValidationError("Subject greater than 10")
 
 
-class SendMessageSerializer(serializers.Serializer):
-    subject = serializers.CharField(allow_null=True)
-    message = serializers.CharField(max_length=250)
-    email = serializers.EmailField(max_length=250)
-    phone = serializers.CharField(max_length=250, allow_null=True)
+class SendMessageSerializer(serializers.ModelSerializer):
 
     def validate_subject(self, value: str):
         if value.startswith('Salom'):
@@ -32,23 +30,17 @@ class SendMessageSerializer(serializers.Serializer):
         data.pop('phone')
         return data
 
-    def save(self, **kwargs):
-        subject = self.validated_data.get('subject')
-        message = self.validated_data.get('message')
-        from_email = self.validated_data.get('email')
-        recipient_list = [settings.RECIPIENT_ADDRESS]
-        email = Email.objects.create(subject=self.subject, message=message, email=from_email,
-                                     recipient=recipient_list[0])
-        # return email
-
     class Meta:
-        validators = [
-            UniqueTogetherValidator(
-                queryset=Email.objects.all(),
-                fields=['subject', 'message'],
-                message=_("Subject and message fields must be unique")
-            )
-        ]
+        model = Email
+        fields = ['subject', 'message', 'email', 'recipient', 'phone']
+
+        # validators = [
+        #     UniqueTogetherValidator(
+        #         queryset=Email.objects.all(),
+        #         fields=['subject', 'message'],
+        #         message=_("Subject and message fields must be unique")
+        #     )
+        # ]
 
 
 class EmailSerializer(serializers.ModelSerializer):

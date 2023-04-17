@@ -1,5 +1,7 @@
+import threading
 from collections import OrderedDict
 
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
@@ -15,6 +17,7 @@ from api.sendEmail.exceptions.exceptions import CustomException
 from api.sendEmail.filters.filters import EmailFilter
 from api.sendEmail.serializers.serializers import SendMessageSerializer, EmailSerializer
 from apps.sendEmail.models import Email
+from config import settings
 
 
 class SendEmail(GenericAPIView):
@@ -27,6 +30,12 @@ class SendEmail(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         serializer_data = serializer.validated_data
         serializer.save()
+
+        send_email_thread = threading.Thread(target=send_mail, args=(serializer_data.get('subject'),
+                                                                     serializer_data.get('message'),
+                                                                     serializer_data.get('email'),
+                                                                     [settings.RECIPIENT_ADDRESS]))
+        send_email_thread.start()
 
         data = OrderedDict([
             ('success', True),
