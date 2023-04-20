@@ -1,5 +1,6 @@
+from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.exceptions import NotAuthenticated
@@ -8,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.views.generic import TemplateView
 
 from api.auth_user.serializers.serializers import CustomObtainPairSerializer, CustomTokenRefreshSerializer, \
     LogoutSerializer, CustomUserProfilesSerializer
@@ -71,3 +73,24 @@ class CustomUserView(GenericAPIView):
         serializer = self.get_serializer(request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+
+class CustomTemplateView(TemplateView):
+    template_name = 'authorization/login.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        if request.user.is_authenticated:
+            return redirect('admin:index')
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        pass1 = request.POST.get('pass')
+        user = authenticate(request, username=username, password=pass1)
+        if user is not None:
+            login(request, user)
+            return redirect('admin:index')
+        else:
+            context = {}
+            return render(request, self.template_name, context=context)
