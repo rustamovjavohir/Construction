@@ -12,6 +12,7 @@ coreschema==0.0.4
 dj-database-url==1.0.0
 Django==4.0.4
 django-cors-headers==3.12.0
+django-crispy-forms==2.0
 django-elasticsearch-dsl==7.3
 django-elasticsearch-dsl-drf==0.22.5
 django-extra-fields==3.0.2
@@ -29,6 +30,7 @@ elasticsearch==7.17.9
 elasticsearch-dsl==7.4.1
 environs==9.5.0
 exceptiongroup==1.1.0
+face-recognition-models==0.3.0
 fake-factory==9999.9.9
 Faker==18.4.0
 gunicorn==20.1.0

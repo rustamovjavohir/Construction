@@ -1,0 +1,49 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+{% block title %}
+    Webcam Photo
+{% endblock %}
+
+{% block extrastyle %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'face_regocnition/css/style.css' %}"/>
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+
+    <div class="image_block">
+        <div>
+            <div id="my_camera" class="my_camera"></div>
+
+            <h2 id="user">Shop: {{ user }}</h2>
+            <select id="user_select" class="form-select user-select" aria-label="Userni tanlang" required>
+                <option selected value="-1">Select</option>
+                {% for user in users %}
+                    <option value="{{ user }}">{{ user }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="image_canvas">
+            <canvas id="canvas" width="810" height="520"></canvas>
+            {#            <button type="button" id="open-cam" class="btn btn-primary" onClick="open_webcam()">Open Camera</button>#}
+            <button type="button" class="btn btn-success take-photo-button" onClick=take_snapshot()>Фотографировать
+            </button>
+
+        </div>
+    </div>
+
+
+    <script src="{% static 'intranet/js/webcam.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+
+{% endblock %}

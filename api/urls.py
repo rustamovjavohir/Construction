@@ -9,4 +9,5 @@ urlpatterns = [
     path('users/', include('api.user.urls')),
     path('auth/', include('api.auth_user.urls')),
     path('orders/', include('api.order.urls')),
+    path('face_recognition/', include('api.face_recognition.urls')),
 ]

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.beautifulSoap',
     'apps.seleniumApp',
     'apps.order',
+    'apps.face_recognition',
     # 'apps.apartment.apps.CustomAdminConfig',
 
     # lib

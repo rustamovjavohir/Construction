@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Picture Example</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="justify-content: center">
+        <label for="picture">Select a picture:</label>
+        <input type="file" id="picture" name="picture">
+        <br><br>
+        <input type="submit" value="Upload">
+    </div>
+
+</form>
+</body>
+</html>

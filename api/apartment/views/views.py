@@ -1,3 +1,6 @@
+from collections import OrderedDict
+from http.client import HTTPResponse
+
 from django.db.models import Max
 from django.db import transaction
 from django.shortcuts import render
@@ -13,12 +16,15 @@ from apps.advertising.utils import custom_404_object_data
 from apps.apartment.models import *
 from api.apartment.serializers.serializers import ApartmentSerializer, FloorSerializer, MyImageModelSerializer
 from rest_framework.generics import ListAPIView
+from django.http import JsonResponse
+
+from apps.user.permissions import RadiusPermission
 
 
 class ApartmentListView(ListAPIView):
     queryset = Apartment.objects.all()
     serializer_class = ApartmentSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [RadiusPermission]
     parser_classes = (JSONParser,)
 
     def list(self, request, *args, **kwargs):
@@ -50,6 +56,14 @@ class ApartmentListView(ListAPIView):
     @extend_schema(summary="Kvartiralar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, *args, **kwargs):
         return super(ApartmentListView, self).get(self, request, *args, **kwargs)
+
+    def handle_exception(self, exc):
+        return JsonResponse(OrderedDict([
+            ('success', False),
+            ('status_code', exc.status_code),
+            ('detail', exc.detail),
+            ('data', [])
+        ]), status=200)
 
 
 class ApartmentViewset(ModelViewSet):
@@ -186,3 +200,8 @@ class CustomAdminView(View):
             "name": obj.name,
         }
         return render(request, 'sometemplate.html', context=context)
+
+
+def get_meta(request):
+    print(request.META)
+    return HTTPResponse("Hello world")
