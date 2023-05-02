@@ -2,9 +2,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from apps.auth_user.models import CustomUser
+from apps.face_recognition.models import FaceRecognition
 
 
 # Register your models here.
+class FaceRecognitionInline(admin.StackedInline):
+    model = FaceRecognition
+    extra = 1
+    fields = ('user', 'name', 'age', 'image')
 
 
 @admin.register(CustomUser)
@@ -18,3 +23,5 @@ class AdminUser(UserAdmin):
     UserAdmin.fieldsets += (
         ('Профиль', {'fields': ('photo', 'telegram_id')}),
     )
+
+    inlines = [FaceRecognitionInline]
