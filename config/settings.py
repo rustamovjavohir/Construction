@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from environs import Env
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -333,7 +334,7 @@ JAZZMIN_SETTINGS = {
     # "hide_models": [],
     #
     # # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["user", "apartment", "advertising", "sendEmail", "selenium"],
+    "order_with_respect_to": ["order", "user", "apartment", "advertising", "sendEmail", "selenium"],
     #
     # # Custom links to append to app groups, keyed on app name
     "custom_links": {
@@ -350,6 +351,13 @@ JAZZMIN_SETTINGS = {
                 "new_window": True,
                 "icon": "fas fa-robot",
             },
+            {
+                "name": "Index",
+                "url": reverse_lazy("face_recognition"),
+                "new_window": True,
+                "icon": "fas fa-user",
+                "permissions": ["face_recognition.view_index"],
+            }
 
         ]
     },

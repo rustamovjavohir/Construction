@@ -1,3 +1,6 @@
-from django.test import TestCase
+from django.apps import apps
 
-# Create your tests here.
+app_configs = apps.get_app_configs()
+
+for app_config in app_configs:
+    print(app_config.name)

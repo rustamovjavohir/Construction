@@ -16,3 +16,10 @@ class FaceRecognition(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Face Recognition'
+        verbose_name_plural = 'Face Recognition'
+        permissions = (
+            ('view_index', 'Can view index'),
+        )

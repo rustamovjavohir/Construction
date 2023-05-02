@@ -13,6 +13,10 @@
     {{ block.super }}
 {% endblock %}
 
+{% block nav %}
+    {{ block.super }}
+    <li><a href="https://nesuvezu.com/admin/">NesuVezu</a></li>
+{% endblock %}
 {% block content %}
     {% csrf_token %}
 

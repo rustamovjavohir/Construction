@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.text import capfirst
 
 from apps.face_recognition.forms import FaceRecognitionForm
 from apps.face_recognition.models import FaceRecognition
@@ -42,6 +43,14 @@ class FaceRecognitionAdmin(admin.ModelAdmin):
         return format_html(
             '<a href="{}/change/">{}</a>', obj.id, obj.name
         )
+
+    def get_app_list(self, request):
+        app_list = super().get_app_list(request)
+        for app in app_list:
+            app['models'].sort(key=lambda x: x['name'])
+            for model in app['models']:
+                model['name'] = capfirst(model['name'])
+        return app_list
 
 
 FaceRecognitionAdmin.actions_on_top = True
