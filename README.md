@@ -9,3 +9,4 @@
 - ElasticSearch
 - JWT authentication
 - Python telegram bot
+- Swagger

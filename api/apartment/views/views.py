@@ -58,12 +58,13 @@ class ApartmentListView(ListAPIView):
         return super(ApartmentListView, self).get(self, request, *args, **kwargs)
 
     def handle_exception(self, exc):
-        return JsonResponse(OrderedDict([
-            ('success', False),
-            ('status_code', exc.status_code),
-            ('detail', exc.detail),
-            ('data', [])
-        ]), status=200)
+        if not isinstance(exc, AttributeError):
+            return JsonResponse(OrderedDict([
+                ('success', False),
+                ('status_code', exc.status_code),
+                ('detail', exc.detail),
+                ('data', [])
+            ]), status=200)
 
 
 class ApartmentViewset(ModelViewSet):

@@ -7,6 +7,7 @@ cachetools==4.2.2
 certifi==2021.10.8
 cffi==1.15.1
 charset-normalizer==2.0.12
+cmake==3.26.3
 coreapi==2.3.3
 coreschema==0.0.4
 dj-database-url==1.0.0

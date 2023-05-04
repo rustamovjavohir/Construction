@@ -34,6 +34,9 @@ DEBUG = env.bool("DEBUG", default=False)
 # DEBUG = True
 ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
 # ALLOWED_HOSTS = ["*"]
+TELEGRAM_CHAT_ID = env.str("TELEGRAM_CHAT_ID")
+TELEGRAM_BOT_TOKEN = env.str("TELEGRAM_BOT_TOKEN")
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'config.middlewares.TelegramErrorMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

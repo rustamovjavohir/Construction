@@ -1,5 +1,3 @@
-
-
 def custom_404_object_data():
     data = {
         "success": False,
