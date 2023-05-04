@@ -49,15 +49,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #  local
-    "auth_user",
-    "apartment",
-    "user",
-    'advertising',
-    'sendEmail',
-    'beautifulSoap',
-    'seleniumApp',
-    'order',
-    'face_recognition',
+    "apps.auth_user",
+    "apps.apartment",
+    "apps.user",
+    'apps.advertising',
+    'apps.sendEmail',
+    'apps.beautifulSoap',
+    'apps.seleniumApp',
+    'apps.order',
+    'apps.face_recognition',
 
     # lib
     'environs',
