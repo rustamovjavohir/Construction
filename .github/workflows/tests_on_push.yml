@@ -24,6 +24,8 @@ jobs:
           envkey_DB_PASS: ${{ secrets.DB_PASS }}
           envkey_DB_SERVICE: ${{ secrets.DB_SERVICE }}
           envkey_DB_PORT: ${{ secrets.DB_PORT }}
+          envkey_telegram_chat_id: ${{ secrets.telegram_chat_id }}
+          envkey_telegram_bot_token: ${{ secrets.telegram_bot_token }}
           some_other_variable: foobar
           file_name: .env
           fail_on_empty: false
