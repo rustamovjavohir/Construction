@@ -11,3 +11,5 @@ urlpatterns = [
     path('orders/', include('api.order.urls')),
     path('face_recognition/', include('api.face_recognition.urls')),
 ]
+
+# go
