@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.seleniumApp',
     'apps.order',
     'apps.face_recognition',
+    'apps.ddos',
 
     # lib
     'environs',
@@ -85,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'config.middlewares.TelegramErrorMiddleware',
+    'apps.ddos.middleware.DDOSMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
