@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.exceptions import NotAuthenticated
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -51,6 +52,7 @@ class LogoutView(GenericAPIView):
 class CustomUserView(GenericAPIView):
     serializer_class = CustomUserProfilesSerializer
     permission_classes = [IsAuthenticated, ]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def handle_exception(self, exc):
         response = super().handle_exception(exc)
