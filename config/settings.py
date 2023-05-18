@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'apps.order',
     'apps.face_recognition',
     'apps.ddos',
+    'apps.bot',
 
     # lib
     'environs',
