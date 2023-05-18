@@ -31,11 +31,10 @@ SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
-# DEBUG = True
 ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
-# ALLOWED_HOSTS = ["*"]
 TELEGRAM_CHAT_ID = env.str("TELEGRAM_CHAT_ID")
 TELEGRAM_BOT_TOKEN = env.str("TELEGRAM_BOT_TOKEN")
+HOST = env.str("HOST")
 
 # Application definition
 

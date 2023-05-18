@@ -10,6 +10,7 @@ urlpatterns = [
     path('auth/', include('api.auth_user.urls')),
     path('orders/', include('api.order.urls')),
     path('face_recognition/', include('api.face_recognition.urls')),
+    path('bot/', include('api.bot.urls')),
 ]
 
 # go
