@@ -32,6 +32,6 @@ jobs:
           file_name: .env
           fail_on_empty: false
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r ./requirements/requirements.txt
       - name: Tests
         run: python manage.py test

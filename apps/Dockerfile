@@ -6,9 +6,9 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/construction
 
-COPY ../requirements.txt /usr/src/construction/requirements.txt
+COPY ../requirements/requirements.txt /usr/src/construction/requirements/requirements.txt
 
-RUN pip install -r /usr/src/construction/requirements.txt
+RUN pip install -r /usr/src/construction/requirements/requirements.txt
 
 COPY .. /usr/src/construction
 
