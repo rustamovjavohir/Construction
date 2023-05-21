@@ -1,6 +1,7 @@
 import json
 
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -33,3 +34,8 @@ class HelloView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse('Hello world', status=200)
+
+
+class WebView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'web_telegram/index.html')
