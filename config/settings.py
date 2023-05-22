@@ -115,17 +115,17 @@ AUTH_USER_MODEL = "auth_user.CustomUser"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-# DATABASES = {'default': env.dj_db_url('DATABASE_URL')}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASS'],
-        'HOST': os.environ['DB_SERVICE'],
-        'PORT': os.environ['DB_PORT']
-    }
-}
+DATABASES = {'default': env.dj_db_url('DATABASE_URL')}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ['DB_NAME'],
+#         'USER': os.environ['DB_USER'],
+#         'PASSWORD': os.environ['DB_PASS'],
+#         'HOST': os.environ['DB_SERVICE'],
+#         'PORT': os.environ['DB_PORT']
+#     }
+# }
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
