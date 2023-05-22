@@ -248,47 +248,6 @@ SIMPLE_JWT = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "main_format": {
-            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
-            "style": "{",
-        },
-        "console": {
-            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
-            "style": "{",
-        },
-    },
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "logs", "debug.log"),
-            "formatter": "main_format",
-            "maxBytes": 1024 * 1024 * 10,  # 10 MB
-            "backupCount": 10,
-        },
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "console",
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file", "console"],
-            "level": "INFO",
-            "propagate": True,
-        },
-        # "django.request": {
-        #     "handlers": ["file", "console"],
-        #     "level": "INFO",
-        #     "propagate": True,
-        # },
-    }
-
-}
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "Construction Admin",
@@ -454,6 +413,51 @@ ELASTICSEARCH_DSL = {
     'default': {
         'hosts': 'localhost:9200'
     },
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "main_format": {
+            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+        "console": {
+            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file_handler": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "debug.log"),
+            "formatter": "main_format",
+            # "maxBytes": 1024 * 1024 * 10,  # 10 MB
+            # "backupCount": 10
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "console",
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file_handler", "console"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ["file_handler", "console"],
+            "level": "INFO",
+            "propagate": True,
+        },
+    }
 }
 
 try:
