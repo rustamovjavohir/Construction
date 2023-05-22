@@ -415,49 +415,55 @@ ELASTICSEARCH_DSL = {
     },
 }
 
+FORMATTER = {
+    "main_format": {
+        "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
+        "style": "{",
+    },
+    "simple": {
+        "format": "{levelname} {message}",
+        "style": "{",
+    },
+    "console": {
+        "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
+        "style": "{",
+    },
+}
+
+HANDLERS = {
+    "file_handler": {
+        "level": "INFO",
+        "class": "logging.FileHandler",
+        "filename": os.path.join(BASE_DIR, "logs", "debug.log"),
+        "formatter": "main_format",
+        # "maxBytes": 1024 * 1024 * 10,  # 10 MB
+        # "backupCount": 10
+    },
+    "console": {
+        "class": "logging.StreamHandler",
+        "formatter": "console",
+    }
+}
+
+LOGGERS = {
+    "django": {
+        "handlers": ["file_handler", "console"],
+        "level": "INFO",
+        "propagate": True,
+    },
+    "django.request": {
+        "handlers": ["file_handler", "console"],
+        "level": "INFO",
+        "propagate": True,
+    },
+}
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {
-        "main_format": {
-            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
-            "style": "{",
-        },
-        "simple": {
-            "format": "{levelname} {message}",
-            "style": "{",
-        },
-        "console": {
-            "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
-            "style": "{",
-        },
-    },
-    "handlers": {
-        "file_handler": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "logs", "debug.log"),
-            "formatter": "main_format",
-            # "maxBytes": 1024 * 1024 * 10,  # 10 MB
-            # "backupCount": 10
-        },
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "console",
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file_handler", "console"],
-            "level": "INFO",
-            "propagate": True,
-        },
-        "django.request": {
-            "handlers": ["file_handler", "console"],
-            "level": "INFO",
-            "propagate": True,
-        },
-    }
+    "formatters": FORMATTER,
+    "handlers": HANDLERS,
+    "loggers": LOGGERS,
 }
 
 try:
