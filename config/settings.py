@@ -435,9 +435,7 @@ HANDLERS = {
         "level": "INFO",
         "class": "logging.FileHandler",
         "filename": os.path.join(BASE_DIR, "logs", "debug.log"),
-        "formatter": "main_format",
-        # "maxBytes": 1024 * 1024 * 10,  # 10 MB
-        # "backupCount": 10
+        "formatter": "main_format"
     },
     "console": {
         "class": "logging.StreamHandler",
@@ -458,13 +456,13 @@ LOGGERS = {
     },
 }
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": FORMATTER,
-    "handlers": HANDLERS,
-    "loggers": LOGGERS,
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": FORMATTER,
+#     "handlers": HANDLERS,
+#     "loggers": LOGGERS,
+# }
 
 try:
     from .local_settings import *
