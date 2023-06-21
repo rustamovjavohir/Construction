@@ -38,4 +38,5 @@ class HelloView(View):
 
 class WebView(View):
     def get(self, request, *args, **kwargs):
+        # return render(request, 'web_telegram/simple.html')
         return render(request, 'web_telegram/index.html')
