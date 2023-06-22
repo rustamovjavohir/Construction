@@ -1,40 +1,50 @@
-# from django.test import TestCase
-# from django.urls import reverse
-
-# from apps.user.models import User
-
-
-# # Create your tests here.
-# class TestUser(TestCase):
-#     def setUp(self):
-#         self.user = User.objects.create(
-#             username=" test",
-#             email=" ",  # email is required
-#             phone="998999999989"
-#         )
-
-#     def test_user(self):
-#         self.assertEqual(self.user.username, " test")
-#         self.assertEqual(self.user.email, " ")
-#         self.assertEqual(self.user.phone, "998999999989")
-
-#     def test_url_user(self):
-#         url = reverse("user-list")
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
+import time
+from datetime import datetime, timedelta
+from functools import reduce, lru_cache, cache, wraps
 
 
+def cache_decorator(func):
+    _cache = {}
 
-def transformString(sentense):
-    words = sentense.split()
-    transform_string = []
-    transform_string.append(words[0])
-    for i in range(len(words[1:-1])):
-        if ord(words[i]) < ord(words[i+1]):
-            transform_string.append(words[i+1].upper())
+    def wrapper(*args):
+        if args not in _cache:
+            _cache[args] = func(*args)
         else:
-            transform_string.append(words[i+1].lower())
-    return " ".join(transform_string)
+            result = func(*args)
+            _cache[args] = result
+        return _cache[args]
 
-result = transformString("Hello World")
-print(result)
+    return wrapper
+
+
+def timed_lru_cache(seconds: int, maxsize: int = 128):
+    def wrapper_cache(func):
+        func = lru_cache(maxsize=maxsize)(func)
+        func.lifetime = timedelta(seconds=seconds)
+        func.expiration = datetime.utcnow() + func.lifetime
+
+        @wraps(func)
+        def wrapped_func(*args, **kwargs):
+            if datetime.utcnow() >= func.expiration:
+                func.cache_clear()
+                func.expiration = datetime.utcnow() + func.lifetime
+
+            return func(*args, **kwargs)
+
+        return wrapped_func
+
+    return wrapper_cache
+
+
+@lru_cache
+def fibonacci(n):
+    if n <= 2:
+        return 1
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+if __name__ == '__main__':
+    start = time.process_time_ns()
+    print(fibonacci(500))
+    end_time = time.process_time_ns()
+    print(end_time - start)
