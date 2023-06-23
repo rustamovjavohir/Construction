@@ -10,3 +10,4 @@
 - JWT authentication
 - Python telegram bot
 - Swagger
+- Cache with Redis in "api/beautiful/" and "api/apartment/" endpoints
