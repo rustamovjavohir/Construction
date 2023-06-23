@@ -1,11 +1,21 @@
+import datetime
+import time
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
 import base64
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+
 from apps.beautifulSoap.data import data as base_data
 
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+
+@cache_page(CACHE_TTL, key_prefix='beautifulSoap')
 def beautifulSoap(request):
     url = 'https://kun.uz/'
     response = requests.get(url)
@@ -13,6 +23,7 @@ def beautifulSoap(request):
 
     soup = BeautifulSoup(html_content, 'html.parser')
     # title = soup.find('title').text
+    time.sleep(2)
 
     title = soup.find(class_="big-news__title").text
     description = soup.find(class_="big-news__description").text
@@ -20,8 +31,9 @@ def beautifulSoap(request):
     img = soup.find(class_="big-news__img").find_all('img')[0].get("src")
 
     # images = soup.find_all('img', {'class': 'my-class'})
-
+    _datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     context = {
+        "datetime": _datetime,
         "title": title,
         "description": description,
         "content": content,
@@ -30,6 +42,7 @@ def beautifulSoap(request):
     return render(request, 'beautifulsoap.html', context=context)
 
 
+@cache_page(CACHE_TTL, key_prefix='katm')
 def katm(request):
     with open(r'media/base64.txt', mode='rb') as file:
         text = file.read()
