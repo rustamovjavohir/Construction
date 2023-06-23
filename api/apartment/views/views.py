@@ -59,7 +59,7 @@ class ApartmentListView(ListAPIView):
         }
         return Response(data=data, status=200)
 
-    @method_decorator(cache_page(CACHE_TTL))  # cache requested url for 15 minutes
+    @method_decorator(cache_page(CACHE_TTL, key_prefix='apartment_list'))  # cache requested url for 15 minutes
     @method_decorator(vary_on_cookie)
     @extend_schema(summary="Kvartiralar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, *args, **kwargs):
