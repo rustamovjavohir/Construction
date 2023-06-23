@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import datetime
 
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
@@ -21,6 +22,10 @@ class CustomObtainPairSerializer(TokenObtainPairSerializer):
 
     def validate(self, attrs):
         data = super().validate(attrs)
+        exp = self.get_token(self.user).access_token.get('exp')
+        iat = self.get_token(self.user).access_token.get('iat')
+        data['iat'] = datetime.fromtimestamp(iat)
+        data['exp'] = datetime.fromtimestamp(exp)
         response = OrderedDict([
             ('success', True),
             ('result', data)

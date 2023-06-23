@@ -1,6 +1,10 @@
+import time
 from collections import OrderedDict
 from http.client import HTTPResponse
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie, vary_on_headers
 from django.db.models import Max
 from django.db import transaction
 from django.shortcuts import render
@@ -19,15 +23,17 @@ from rest_framework.generics import ListAPIView
 from django.http import JsonResponse
 
 from apps.user.permissions import RadiusPermission
+from config.settings import CACHE_TTL
 
 
 class ApartmentListView(ListAPIView):
     queryset = Apartment.objects.all()
     serializer_class = ApartmentSerializer
-    permission_classes = [RadiusPermission]
+    # permission_classes = [RadiusPermission]
     parser_classes = (JSONParser,)
 
     def list(self, request, *args, **kwargs):
+        time.sleep(2)
         queryset = self.filter_queryset(self.get_queryset())
         max_floor = self.queryset.aggregate(Max('floor'))
         page = self.paginate_queryset(queryset)
@@ -53,6 +59,8 @@ class ApartmentListView(ListAPIView):
         }
         return Response(data=data, status=200)
 
+    @method_decorator(cache_page(CACHE_TTL))  # cache requested url for 15 minutes
+    @method_decorator(vary_on_cookie)
     @extend_schema(summary="Kvartiralar haqidagi malumotlar ro'yhatini chop etish (list)")
     def get(self, request, *args, **kwargs):
         return super(ApartmentListView, self).get(self, request, *args, **kwargs)

@@ -20,6 +20,9 @@ from api.auth_user.serializers.serializers import CustomObtainPairSerializer, Cu
 class LoginView(TokenObtainPairView):
     serializer_class = CustomObtainPairSerializer
 
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
 
 class GetRefreshTokenView(TokenRefreshView):
     serializer_class = CustomTokenRefreshSerializer
