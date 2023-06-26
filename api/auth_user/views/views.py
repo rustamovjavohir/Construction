@@ -21,6 +21,7 @@ class LoginView(TokenObtainPairView):
     serializer_class = CustomObtainPairSerializer
 
     def post(self, request, *args, **kwargs):
+        print('LoginView')
         return super().post(request, *args, **kwargs)
 
 

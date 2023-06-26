@@ -38,7 +38,7 @@ HOST = env.str("HOST")
 
 # Application definition
 
-INSTALLED_APPS = [
+FIRST_APPS = [
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
-    #  local
+LOCAL_APPS = [
+    # local
     "apps.auth_user",
     "apps.apartment",
     "apps.user",
@@ -59,7 +61,9 @@ INSTALLED_APPS = [
     'apps.face_recognition',
     'apps.ddos',
     'apps.bot',
+]
 
+THIRD_APP = [
     # lib
     'environs',
     'PIL',
@@ -73,8 +77,11 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
     'django_filters',
-
+    'django_celery_results',
+    'django_celery_beat',
 ]
+
+INSTALLED_APPS = FIRST_APPS + LOCAL_APPS + THIRD_APP
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -176,6 +183,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ------------------------------------------SWAGGER_SETTINGS------------------------------------------------------------
 # SWAGGER_SETTINGS = {
 #     'SECURITY_DEFINITIONS': {
 #         'Bearer': {
@@ -197,6 +205,8 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
+# ------------------------------------------REST FRAMEWORK--------------------------------------------------------------
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -204,6 +214,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # <-- it is openapi.AutoSchema
 }
+
+# ------------------------------------------SIMPLE JWT------------------------------------------------------------------
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
@@ -247,6 +259,8 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# -------------------------------------------------JAZMIN SETTINGS------------------------------------------------------
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
@@ -408,13 +422,14 @@ JAZZMIN_SETTINGS = {
     # # Add a language dropdown into the admin
     # "language_chooser": True,
 }
+# ----------------------------------------------ELASTICSEARCH-----------------------------------------------------------
 
 ELASTICSEARCH_DSL = {
     'default': {
         'hosts': 'localhost:9200'
     },
 }
-
+# ----------------------------------------------LOGGING-----------------------------------------------------------------
 FORMATTER = {
     "main_format": {
         "format": "{asctime} - {levelname} - {module} - {filename} - {message}",
@@ -463,7 +478,7 @@ LOGGERS = {
 #     "handlers": HANDLERS,
 #     "loggers": LOGGERS,
 # }
-
+# -------------------------------------------------CACHING--------------------------------------------------------------
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -476,6 +491,23 @@ CACHES = {
 }
 
 CACHE_TTL = 60 * 15
+
+# -------------------------------------------------CELERY--------------------------------------------------------------
+# CELERY_BROKER_URL = "redis://localhost:6379/1"  # In the old version, the settings were in capital letters
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+# broker_url = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# result_backend = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_URL = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
+CELERY_RESULT_BACKEND = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
+accept_content = ['application/json']
+task_serializer = 'json'
+result_serializer = 'json'
+broker_connection_retry_on_startup = True
+broker_transport_options = {'visibility_timeout': 60 * 60}
+timezone = 'Asia/Tashkent'
+task_always_eager = True  # delay() buyrugini yozish shart emas
+# -------------------------------------------------CELERY---------------------------------------------------------------
 
 try:
     from .local_settings import *

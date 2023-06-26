@@ -11,3 +11,4 @@
 - Python telegram bot
 - Swagger
 - Cache with Redis in "api/beautiful/" and "api/apartment/" endpoints
+- Celery add in app.users.tasks documentation in Celery.md
