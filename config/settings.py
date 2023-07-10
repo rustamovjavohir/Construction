@@ -38,7 +38,7 @@ HOST = env.str("HOST")
 
 # Application definition
 
-FIRST_APPS = [
+DEFAULT_APPS = [
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,7 +81,7 @@ THIRD_APP = [
     'django_celery_beat',
 ]
 
-INSTALLED_APPS = FIRST_APPS + LOCAL_APPS + THIRD_APP
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APP
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -93,7 +93,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'config.middlewares.TelegramErrorMiddleware',
-    'apps.ddos.middleware.DDOSMiddleware',
+    # 'apps.ddos.middleware.DDOSMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -160,7 +160,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Asia/Tashkent'
+TIME_ZONE = 'Asia/Tashkent'  # TODO: change to Asia/Tashkent
 
 USE_I18N = True
 

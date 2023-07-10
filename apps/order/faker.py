@@ -4,7 +4,7 @@ from faker import Faker
 from apps.order.models import Order
 
 
-def fake_order(fake_number: int):
+def fake_order(fake_number: int = 100):
     fake = Faker()
     for _ in range(fake_number):
         try:

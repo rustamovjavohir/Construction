@@ -16,7 +16,7 @@ class Floor(models.Model):
 
 
 class Apartment(models.Model):
-    room_quantity = models.IntegerField(null=True, blank=True)
+    room_quantity = models.IntegerField(null=True)
     area = models.FloatField(null=True, blank=True)
     # floor = models.ManyToManyField(to=Floor)
     floor = models.IntegerField(null=True, blank=True)

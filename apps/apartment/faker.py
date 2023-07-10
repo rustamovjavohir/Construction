@@ -4,9 +4,9 @@ from faker import Faker
 from apps.apartment.models import Apartment
 
 
-def fake_apartment(number=5):
+def fake_apartment(apartment_number: int = 5):
     fake = Faker()
-    for _ in range(number):
+    for _ in range(apartment_number):
         Apartment.objects.create(
             room_quantity=fake.random_int(min=1, max=5),
             area=fake.random_int(min=40, max=200),

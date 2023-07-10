@@ -77,7 +77,7 @@ class ApartmentListView(ListAPIView):
 
 class ApartmentViewset(ModelViewSet):
     queryset = Apartment.objects.filter(is_deleted=False)
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [AllowAny, ]
     serializer_class = MyImageModelSerializer
     filter_backends = (filters.SearchFilter,)
     parser_classes = [JSONParser, ]
