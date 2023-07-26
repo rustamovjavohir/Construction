@@ -294,7 +294,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "rustamovdev.uz",
     #
     # # The model admin to search from the search bar, search bar omitted if excluded
-    "search_model": "auth.User",
+    "search_model": "auth_user.CustomUser",
     #
     # # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": 'photo',
@@ -304,21 +304,21 @@ JAZZMIN_SETTINGS = {
     # ############
     #
     # # Links to put along the top menu
-    "topmenu_links": [
-
-        # Url that gets reversed (Permissions can be added)
-        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
-
-        # external url that opens in a new window (Permissions can be added)
-        # {"name": "Дашбоард", "url": "dashboard", "new_window": True},
-
-        # model admin to link to (Permissions checked against model)
-        {"model": "auth.User"},
-
-        # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "order"},
-        # {"app": "shop"},
-    ],
+    # "topmenu_links": [
+    #
+    #     # Url that gets reversed (Permissions can be added)
+    #     {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+    #
+    #     # external url that opens in a new window (Permissions can be added)
+    #     # {"name": "Дашбоард", "url": "dashboard", "new_window": True},
+    #
+    #     # model admin to link to (Permissions checked against model)
+    #     {"model": "auth.User"},
+    #
+    #     # App with dropdown menu to all its models pages (Permissions checked against models)
+    #     {"app": "order"},
+    #     # {"app": "shop"},
+    # ],
     #
     # #############
     # # User Menu #
@@ -350,44 +350,44 @@ JAZZMIN_SETTINGS = {
     "order_with_respect_to": ["order", "user", "apartment", "advertising", "sendEmail", "selenium"],
     #
     # # Custom links to append to app groups, keyed on app name
-    "custom_links": {
-        "order": [
-            {
-                "name": "Телеграм канал ",
-                "url": "https://t.me/+rHSr3iwZxV1kYTNiassdf",
-                "new_window": True,
-                "icon": "fas fa-comments",
-            },
-            {
-                "name": "Телеграм бот",
-                "url": "https://t.me/diskont_rassrasdfochkabsdasotasdfasf",
-                "new_window": True,
-                "icon": "fas fa-robot",
-            },
-            {
-                "name": "Index",
-                "url": reverse_lazy("face_recognition"),
-                "new_window": True,
-                "icon": "fas fa-user",
-                "permissions": ["face_recognition.view_index"],
-            }
-
-        ]
-    },
+    # "custom_links": {
+    #     "order": [
+    #         {
+    #             "name": "Телеграм канал ",
+    #             "url": "https://t.me/+rHSr3iwZxV1kYTNiassdf",
+    #             "new_window": True,
+    #             "icon": "fas fa-comments",
+    #         },
+    #         {
+    #             "name": "Телеграм бот",
+    #             "url": "https://t.me/diskont_rassrasdfochkabsdasotasdfasf",
+    #             "new_window": True,
+    #             "icon": "fas fa-robot",
+    #         },
+    #         {
+    #             "name": "Index",
+    #             "url": reverse_lazy("face_recognition"),
+    #             "new_window": True,
+    #             "icon": "fas fa-user",
+    #             "permissions": ["face_recognition.view_index"],
+    #         }
+    #
+    #     ]
+    # },
     # # for the full list of 5.13.0 free icon classes
-    "icons": {
-        "user.User": "fas fa-user",
-        "sendEmail.Email": "fas fa-envelope",  # "fas fa-envelope"
-        "apartment.Apartment": "fas fa-building",
-        "shop.shop": "fas fa-store",
-        "shop.orderGroup": "fas fa-shopping-basket",
-        "auth_user.CustomUser": "fas fa-users-cog",
-        "auth_user.Manager": "fas fa-user-tie",
-        "auth_user.Seller": "fas fa-user",
-        "auth_user.BlackListUser": "fas fa-user-slash",
-        "auth.Group": "fas fa-users",
-
-    },
+    # "icons": {
+    #     "user.User": "fas fa-user",
+    #     "sendEmail.Email": "fas fa-envelope",  # "fas fa-envelope"
+    #     "apartment.Apartment": "fas fa-building",
+    #     "shop.shop": "fas fa-store",
+    #     "shop.orderGroup": "fas fa-shopping-basket",
+    #     "auth_user.CustomUser": "fas fa-users-cog",
+    #     "auth_user.Manager": "fas fa-user-tie",
+    #     "auth_user.Seller": "fas fa-user",
+    #     "auth_user.BlackListUser": "fas fa-user-slash",
+    #     "auth.Group": "fas fa-users",
+    #
+    # },
     # # Icons that are used when one is not manually specified
     # "default_icon_parents": "fas fa-chevron-circle-right",
     # "default_icon_children": "fas fa-circle",
