@@ -16,3 +16,4 @@ class Command(BaseCommand):
         hostname = f'{settings.HOST}/api/bot/'
         print(f'setting MASTER webhook at {hostname}')
         bot.set_webhook(hostname)
+
