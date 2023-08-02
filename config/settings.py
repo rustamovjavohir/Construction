@@ -79,6 +79,12 @@ THIRD_APP = [
     'django_filters',
     'django_celery_results',
     'django_celery_beat',
+
+    'django.contrib.sites',  # must
+    'allauth',  # must
+    'allauth.account',  # must
+    'allauth.socialaccount',  # must
+    'allauth.socialaccount.providers.google',  # new
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APP
@@ -183,6 +189,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+# ------------------------------------------SOCIAL_ACCOUNT--------------------------------------------------------------
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+SITE_ID = 1
 # ------------------------------------------SWAGGER_SETTINGS------------------------------------------------------------
 # SWAGGER_SETTINGS = {
 #     'SECURITY_DEFINITIONS': {

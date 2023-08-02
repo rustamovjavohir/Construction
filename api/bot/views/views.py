@@ -23,7 +23,7 @@ class BotView(View):
             dispatcher.process_update(update)
             # print(data)
         except Exception as e:
-            print('\n\n Exception:\n')
+            print('\n Exception:\n')
             print(e)
 
         return HttpResponse('ok', status=200)

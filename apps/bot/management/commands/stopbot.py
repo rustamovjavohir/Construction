@@ -5,7 +5,7 @@ from django.conf import settings
 bot = Bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
 
 
-class DeleteWebhookCommand(BaseCommand):
+class Command(BaseCommand):
     help = 'Delete webhook bot'
 
     def handle(self, *args, **kwargs):

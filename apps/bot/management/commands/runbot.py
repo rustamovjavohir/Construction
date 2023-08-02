@@ -13,18 +13,6 @@ class Command(BaseCommand):
         self.ready()
 
     def ready(self):
-        hostname = f'{settings.HOST}/bot/'
+        hostname = f'{settings.HOST}/api/bot/'
         print(f'setting MASTER webhook at {hostname}')
         bot.set_webhook(hostname)
-
-
-class DeleteWebhookCommand(BaseCommand):
-    help = 'Delete webhook bot'
-
-    def handle(self, *args, **kwargs):
-        self.ready()
-
-    def ready(self):
-        hostname = f'{settings.HOST}/bot/'
-        print(f'deleted MASTER webhook at {hostname}')
-        bot.delete_webhook()
