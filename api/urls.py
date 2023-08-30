@@ -11,7 +11,8 @@ urlpatterns = [
     path('orders/', include('api.order.urls')),
     path('face_recognition/', include('api.face_recognition.urls')),
     path('bot/', include('api.bot.urls')),
-    path('oauth2/', include('api.oauth2.urls'))
+    path('oauth2/', include('api.oauth2.urls')),
+    path('billing/', include('api.billing.urls')),
 ]
 
 # go

@@ -61,6 +61,8 @@ LOCAL_APPS = [
     'apps.face_recognition',
     'apps.ddos',
     'apps.bot',
+    'apps.oauth2',
+    'apps.billing',
 ]
 
 THIRD_APP = [
@@ -78,7 +80,8 @@ THIRD_APP = [
     'django_elasticsearch_dsl_drf',
     'django_filters',
     'django_celery_results',
-    'django_celery_beat',
+    # 'django_celery_beat',
+    'payme',
 
     'django.contrib.sites',  # must
     'allauth',  # must
@@ -195,6 +198,18 @@ AUTHENTICATION_BACKENDS = [
 ]
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# ------------------------------------------PAYME_SETTINGS--------------------------------------------------------------
+PAYME: dict = {
+    'PAYME_ID': env.str('PAYME_MERCHANT_ID'),
+    'PAYME_KEY': env.str('PAYME_SECRET_KEY'),
+    'PAYME_URL': 'https://checkout.test.paycom.uz/api/',
+    'PAYME_CALL_BACK_URL': env.str('PAYME_CALL_BACK_URL'),  # merchant api callback url
+    'PAYME_MIN_AMOUNT': '10',  # integer field
+    'PAYME_ACCOUNT': 'order_id',
+}
+
+ORDER_MODEL = 'apps.order.models.Order'
 
 # ------------------------------------------SOCIAL_ACCOUNT--------------------------------------------------------------
 SOCIALACCOUNT_PROVIDERS = {
@@ -500,13 +515,13 @@ LOGGERS = {
     },
 }
 
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "formatters": FORMATTER,
-#     "handlers": HANDLERS,
-#     "loggers": LOGGERS,
-# }
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": FORMATTER,
+    "handlers": HANDLERS,
+    "loggers": LOGGERS,
+}
 # -------------------------------------------------CACHING--------------------------------------------------------------
 CACHES = {
     "default": {
